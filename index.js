@@ -11,4 +11,20 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  port: '3309',
+  password: 'MieAyam678',
+  database: 'mahasiswa',
+});
+
+db.connect((err) => {
+  if (err) {
+    console.log('Error connecting to MySQL: ' + err.stack);
+    return;
+  }
+  console.log('Connected to MySQL successfully');
+});
+
 
