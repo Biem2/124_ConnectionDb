@@ -27,4 +27,15 @@ db.connect((err) => {
   console.log('Connected to MySQL successfully');
 });
 
+app.get('/mahasiswa', (req, res) => {
+  const sql = 'SELECT * FROM biodata';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      return res.status(500).json({ error: 'Database query failed' });
+    }
+    res.json(results);
+  });
+});
+
 
