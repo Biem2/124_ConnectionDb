@@ -38,4 +38,21 @@ app.get('/mahasiswa', (req, res) => {
   });
 });
 
+app.post('/api/mahasiswa', (req, res) => {
+  const { nama, alamat , agama } = req.body;
+
+
+  if (!nama || !alamat || !agama) {
+    return res.status(400).json({ error: 'Semua field harus diisi!' });
+  }
+
+  const sql = 'INSERT INTO biodata (nama, alamat, agama) VALUES (?, ?, ?)';
+  db.query(sql, [nama, alamat, agama], (err, result) => {
+    if (err) {
+      console.error('Error inserting data:', err);
+      return res.status(500).json({ error: 'Gagal menambah data' });
+    }
+    res.status(201).json({ message: 'Data berhasil ditambahkan', id: result.insertId });
+  });
+});
 
